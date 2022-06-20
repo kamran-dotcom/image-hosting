@@ -1,15 +1,18 @@
+import React from "react";
 import { Typography, AppBar, Toolbar, Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
-import React from "react";
+import { Route , Routes , Link} from 'react-router-dom';
 
 const StyleToolbar = styled(Toolbar)({
     display:"flex",
     justifyContent: "space-between",
     background:"white",
     color:"black",
+    borderBottom:"5px",
+    borderBottomColor:"black"
 })
 
 const Icons = styled("div")({
@@ -26,10 +29,15 @@ const IconsInside = styled("div")({
     justifyContent:"center"
 });
 
+const LineBreak = styled("hr")({
+    color:"black",
+    height:"5px"
+})
+
 const Header = () =>{
     return(
         <>
-        <AppBar position="sticky" sx={{backgroundColor:"white",color:"black"}}>
+        {/* <AppBar position="sticky" sx={{backgroundColor:"white",color:"black"}}> */}
             <StyleToolbar>
                 <Icons>
                 <HelpOutlineIcon></HelpOutlineIcon>
@@ -47,12 +55,14 @@ const Header = () =>{
                         <Typography>Sign in</Typography>
                     </IconsInside>
                     <IconsInside>
+                        {/* <Link to="/sign-up"><Button variant="contained">create account</Button></Link> */}
                         <Button variant="contained">create account</Button>
                     </IconsInside>
                     
                 </Icons>
             </StyleToolbar>
-        </AppBar>
+            {/* <LineBreak></LineBreak> */}
+        {/* </AppBar> */}
         </>
     );
 }
