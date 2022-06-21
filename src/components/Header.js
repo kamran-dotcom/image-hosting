@@ -4,8 +4,8 @@ import { styled } from "@mui/system";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
-import { Route , Routes , Link} from 'react-router-dom';
-
+import { Link } from "react-router-dom";
+import '../App.css';
 const StyleToolbar = styled(Toolbar)({
     display:"flex",
     justifyContent: "space-between",
@@ -44,19 +44,24 @@ const Header = () =>{
                 <Typography sx={{ ml:1 }}>About</Typography>
                                     
                 </Icons>
-                <Typography variant="h6">ImgBB</Typography>
+                    <Link to="/" className="links">
+                        <Typography variant="h6">ImgBB</Typography>
+                    </Link>
                 <Icons>
                     <IconsInside>
                         <CloudUploadIcon sx={{mr:1}}></CloudUploadIcon>
                         <Typography>Upload</Typography>
                     </IconsInside>
                     <IconsInside>
+                        <Link to="/login" className="links">
                         <ExitToAppOutlinedIcon sx={{mr:1}}></ExitToAppOutlinedIcon>
+                        </Link>
+                        <Link to="/login" className="links">
                         <Typography>Sign in</Typography>
+                        </Link>
                     </IconsInside>
                     <IconsInside>
-                        {/* <Link to="/sign-up"><Button variant="contained">create account</Button></Link> */}
-                        <Button variant="contained">create account</Button>
+                        <Link to="/sign-up" className="links"><Button variant="contained">create account</Button></Link>
                     </IconsInside>
                     
                 </Icons>
