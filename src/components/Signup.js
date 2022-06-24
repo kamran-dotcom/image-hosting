@@ -1,16 +1,37 @@
 import React, { useState } from "react";
 import Header from '../components/Header';
 import '../App.css';
+import { useNavigate } from "react-router-dom";
 const Signup = ()=>{
 const [name, setName] = useState("");
 const [email,setEmail] = useState("");
 const [password,setPassword] = useState("");
 
-const submitData = (e) =>{
+const navigate = useNavigate();
+
+const submitData = async(e) =>{
     e.preventDefault();
 
     console.log("name",name," email",email," password",password);
-}
+
+    let result = await fetch('http://localhost:5000/register', {
+            method: "POST",
+            body: JSON.stringify({ name, email, password }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        result = await result.json();
+
+        if (result) {
+            // console.log("result", JSON.stringify(result));
+            localStorage.setItem("user", JSON.stringify(result))
+            navigate('/profile');
+        }
+
+        // console.warn(result);
+    }
     return(
         <>
         <Header/>
