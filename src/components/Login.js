@@ -2,16 +2,36 @@ import React, { useState } from "react";
 import Header from '../components/Header';
 
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () =>{
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const submitData = (e)=>{
-        e.preventDefault();
-        alert();
+    const navigate = useNavigate();
 
-        console.log("email",email,"password",password);
+    const submitData = async(e)=>{
+        e.preventDefault();
+        // alert("as");
+
+        let result = await fetch('http://localhost:5000/login', {
+            method: "POST",
+            body: JSON.stringify({ email, password }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        result = await result.json();
+
+        if (result) {
+            // alert("success");
+            // console.log("result", JSON.stringify(result));
+            localStorage.setItem("user", JSON.stringify(result))
+            navigate('/profile');
+        }
+        
+        // console.log("email",email,"password",password);
     }
     return(
         <>
@@ -20,7 +40,7 @@ const Login = () =>{
             <h3>User Login</h3>
             <input type="email" name="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter Email .."/><br/><br/>
             <input type="password" name="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Enter Password .."/><br/><br/>
-            <button onChange={(e)=>submitData(e)}>Login</button>
+            <button onClick={(e)=>submitData(e)}>Login</button>
 
         </div>
         </>
